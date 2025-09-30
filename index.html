@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados dos Exercícios de JS</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #569cd6;
+            text-align: center;
+            border-bottom: 2px solid #569cd6;
+            padding-bottom: 10px;
+        }
+        pre {
+            background-color: #252526;
+            border: 1px solid #333;
+            padding: 15px;
+            white-space: pre-wrap; /* Garante que o texto quebre a linha */
+            word-wrap: break-word;
+            font-size: 14px;
+            line-height: 1.5;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Resultados dos Exercícios de JavaScript (Arrays e Objetos)</h1>
+    
+    <pre id="output"></pre>
+
+    <script>
+        // Seleciona o elemento <pre> onde a saída será exibida
+        const outputElement = document.getElementById('output');
+
+        // Cria uma função para "imprimir" texto no nosso elemento <pre>
+        function printToPage(...args) {
+            // Converte todos os argumentos em texto
+            const text = args.map(arg => {
+                if (typeof arg === 'object' && arg !== null) {
+                    // JSON.stringify formatação p/ melhor visualização
+                    return JSON.stringify(arg, null, 2);
+                }
+                return arg;
+            }).join(' '); 
+
+            outputElement.textContent += text + '\n';
+        }
+
+        // Redefine o console.log para usar nossa nova função
+        // Agora, tudo que for para o console.log aparecerá na página
+        console.log = printToPage;
+
+        /*
+        =================================================
+          Ex - Arrays e Objetos
+        =================================================
+        */
+
+        // --- Exercícios com Arrays ---
+
+        console.log("--- Exercício 1: Criar e Iterar sobre um Array ---");
+        const numeros = [10, 20, 30, 40, 50];
+        numeros.forEach(numero => {
+          console.log(numero);
+        });
+        console.log("\n"); // Adiciona uma linha em branco para separar os exercícios
+
+        console.log("--- Exercício 2: Manipular um Array ---");
+        let frutas = ["Maçã", "Banana", "Morango"];
+        console.log("Array original:", frutas);
+        frutas.push("Uva");
+        console.log("Após adicionar 'Uva':", frutas);
+        frutas.shift();
+        console.log("Após remover a primeira fruta:", frutas);
+        console.log("\n");
+
+        console.log("--- Exercício 3: Filtragem de Array ---");
+        const numerosDeUmADez = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        const numerosPares = numerosDeUmADez.filter(numero => numero % 2 === 0);
+        console.log("Array original:", numerosDeUmADez);
+        console.log("Array com números pares:", numerosPares);
+        console.log("\n");
+
+        console.log("--- Exercício 4: Encontrar o Maior Valor ---");
+        const numerosAleatorios = [27, 10, 3, 99, 20, 5, 6, 8, 9, 12];
+        function encontrarMaiorValor(array) {
+          return Math.max(...array);
+        }
+        const maiorValor = encontrarMaiorValor(numerosAleatorios);
+        console.log("O maior valor no array é:", maiorValor);
+        console.log("\n");
+
+        console.log("--- Exercício 5: Soma dos Elementos ---");
+        const listaDeNumeros = [5, 10, 15, 20];
+        function somarElementos(array) {
+          let soma = 0;
+          for (let i = 0; i < array.length; i++) {
+            soma += array[i];
+          }
+          return soma;
+        }
+        const resultadoSoma = somarElementos(listaDeNumeros);
+        console.log("A soma de todos os elementos é:", resultadoSoma);
+        console.log("\n");
+
+
+        // --- Exercícios com Objetos ---
+
+        console.log("--- Exercício 6: Criar e Acessar um Objeto ---");
+        const pessoa = {
+          nome: "Ana",
+          idade: 30,
+          profissao: "Desenvolvedora"
+        };
+        console.log("Nome:", pessoa.nome);
+        console.log("Idade:", pessoa.idade);
+        console.log("Profissão:", pessoa.profissao);
+        console.log("\n");
+
+        console.log("--- Exercício 7: Modificar um Objeto ---");
+        let carro = {
+          marca: "Fiat",
+          modelo: "Uno",
+          ano: 2010
+        };
+        console.log("Ano original:", carro.ano);
+        carro.ano = new Date().getFullYear();
+        console.log("Ano atualizado:", carro.ano);
+        console.log("\n");
+
+        console.log("--- Exercício 8: Adicionar Propriedade ao Objeto ---");
+        let livro = {
+          titulo: "O Senhor dos Anéis",
+          autor: "J.R.R. Tolkien"
+        };
+        console.log("Objeto antes:", livro);
+        livro.anoDePublicacao = 1954;
+        console.log("Objeto depois:", livro);
+        console.log("\n");
+
+        console.log("--- Exercício 9: Iterar sobre as Propriedades de um Objeto ---");
+        const produto = {
+          nome: "Notebook",
+          preco: 4500.00,
+          quantidade: 15,
+          emEstoque: true
+        };
+        for (let chave in produto) {
+          console.log(`${chave}: ${produto[chave]}`);
+        }
+        console.log("\n");
+
+        console.log("--- Exercício 10: Função para Exibir um Objeto ---");
+        const estudante = {
+          nome: "Carlos",
+          idade: 22,
+          curso: "Engenharia de Software"
+        };
+        function apresentarEstudante(aluno) {
+          console.log(`O estudante ${aluno.nome} tem ${aluno.idade} anos e está cursando ${aluno.curso}.`);
+        }
+        apresentarEstudante(estudante);
+        console.log("\n");
+
+
+        // --- Exercícios Combinados (Objetos e Arrays) ---
+
+        console.log("--- Exercício 11: Array de Objetos ---");
+        const biblioteca = [
+          { titulo: "Dom Casmurro", autor: "Machado de Assis", anoDePublicacao: 1899 },
+          { titulo: "A Arte da Guerra", autor: "Sun Tzu", anoDePublicacao: -500 },
+          { titulo: "1984", autor: "George Orwell", anoDePublicacao: 1949 }
+        ];
+        console.log("Títulos dos livros na biblioteca:");
+        biblioteca.forEach(livro => {
+          console.log(livro.titulo);
+        });
+        console.log("\n");
+
+        console.log("--- Exercício 12: Atualizar Valores de Objetos em um Array ---");
+        let frota = [
+          { marca: "Ford", modelo: "Ka", ano: 2018 },
+          { marca: "Chevrolet", modelo: "Onix", ano: 2020 },
+          { marca: "Hyundai", modelo: "HB20", ano: 2019 }
+        ];
+        const anoAtual = new Date().getFullYear();
+        frota.forEach(carro => {
+          carro.ano = anoAtual;
+        });
+        console.log("Frota com anos atualizados:", frota);
+        console.log("\n");
+
+        console.log("--- Exercício 13: Encontrar um Objeto em um Array ---");
+        const pessoas = [
+          { nome: "Mariana", idade: 28, cidade: "São Paulo" },
+          { nome: "João", idade: 35, cidade: "Rio de Janeiro" },
+          { nome: "Beatriz", idade: 22, cidade: "Belo Horizonte" }
+        ];
+        const pessoaEncontrada = pessoas.find(pessoa => pessoa.idade > 30);
+        if (pessoaEncontrada) {
+          console.log("Pessoa com mais de 30 anos encontrada:", pessoaEncontrada.nome);
+        } else {
+          console.log("Nenhuma pessoa com mais de 30 anos encontrada.");
+        }
+        console.log("\n");
+        
+    </script>
+
+</body>
+</html>
